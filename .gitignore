@@ -1,3 +1,7 @@
+/dev/build
+/dev/dist
+/dev/nbproject/private
+
 *.class
 
 # Package Files #
