@@ -63,7 +63,7 @@ public class RootTreeComponent extends JTree {
     }
     
     public final void clear() {
-        root = new DefaultMutableTreeNode("Root");
+        root = new DefaultMutableTreeNode("Refreshing...");
         treeModel2.setRoot(root);
         this.setModel(treeModel2);
     }

@@ -5,6 +5,7 @@
 package com.gamelion.assetbite.gui;
 
 import com.gamelion.assetbite.control.RootTreeControl;
+import java.awt.Color;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -52,6 +53,7 @@ public class MainForm extends javax.swing.JFrame {
         TopPanel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         BottomPanel = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,7 +144,7 @@ public class MainForm extends javax.swing.JFrame {
 
         TopPanel.setBackground(new java.awt.Color(255, 51, 0));
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Refresh");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -156,7 +158,7 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(TopPanelLayout.createSequentialGroup()
                 .addGap(228, 228, 228)
                 .addComponent(jButton1)
-                .addContainerGap(699, Short.MAX_VALUE))
+                .addContainerGap(701, Short.MAX_VALUE))
         );
         TopPanelLayout.setVerticalGroup(
             TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,15 +172,37 @@ public class MainForm extends javax.swing.JFrame {
 
         BottomPanel.setBackground(new java.awt.Color(51, 51, 255));
 
+        jTextField1.setText("res");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTextField1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         javax.swing.GroupLayout BottomPanelLayout = new javax.swing.GroupLayout(BottomPanel);
         BottomPanel.setLayout(BottomPanelLayout);
         BottomPanelLayout.setHorizontalGroup(
             BottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGroup(BottomPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(569, Short.MAX_VALUE))
         );
         BottomPanelLayout.setVerticalGroup(
             BottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(BottomPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         MainPanel.add(BottomPanel, java.awt.BorderLayout.PAGE_END);
@@ -200,6 +224,14 @@ public class MainForm extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         RootTreeControl.getInstance().refresh();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        RootTreeControl.getInstance().setRootPath(jTextField1.getText());
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTextField1AncestorAdded
+        RootTreeControl.getInstance().setRootPath(jTextField1.getText());
+    }//GEN-LAST:event_jTextField1AncestorAdded
 
     /**
      * @param args the command line arguments
@@ -257,6 +289,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane3;
     private javax.swing.JSplitPane jSplitPane5;
     private javax.swing.JSplitPane jSplitPane6;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTree jTree2;
     private com.gamelion.assetbite.gui.roottree.RootTreeComponent rootTreeComponent1;
     // End of variables declaration//GEN-END:variables

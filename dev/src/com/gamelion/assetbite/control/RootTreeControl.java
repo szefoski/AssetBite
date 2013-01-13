@@ -49,10 +49,14 @@ public class RootTreeControl {
 
         private static final RootTreeControl INSTANCE = new RootTreeControl();
     }
+    
+    
+    public void setRootPath(String s) {
+        rootPath = FileSystems.getDefault().getPath(s);
+    }
 
     
     public void refresh() {
-        rootPath = FileSystems.getDefault().getPath("res");
         rth.clear();
         rtc.clear();
         rtc.refresh();
