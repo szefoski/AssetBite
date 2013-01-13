@@ -6,6 +6,12 @@ package com.gamelion.assetbite.gui;
 
 import com.gamelion.assetbite.control.RootTreeControl;
 import java.awt.Color;
+import java.io.File;
+import java.nio.file.Paths;
+import javax.swing.JFileChooser;
+import javax.swing.UIManager;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -52,39 +58,52 @@ public class MainForm extends javax.swing.JFrame {
         jList3 = new javax.swing.JList();
         TopPanel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jToolBar1 = new javax.swing.JToolBar();
+        jButton2 = new javax.swing.JButton();
         BottomPanel = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(242, 242, 242));
 
+        MainPanel.setBackground(new java.awt.Color(242, 242, 242));
         MainPanel.setPreferredSize(new java.awt.Dimension(1000, 600));
         MainPanel.setLayout(new java.awt.BorderLayout());
 
-        CenterPanel.setBackground(new java.awt.Color(204, 255, 51));
+        CenterPanel.setBackground(new java.awt.Color(242, 242, 242));
         CenterPanel.setLayout(new java.awt.BorderLayout());
 
+        jSplitPane1.setBackground(new java.awt.Color(242, 242, 242));
+        jSplitPane1.setDividerSize(3);
         jSplitPane1.setResizeWeight(0.5);
         jSplitPane1.setPreferredSize(new java.awt.Dimension(1000, 400));
 
+        jSplitPane5.setBackground(new java.awt.Color(242, 242, 242));
+        jSplitPane5.setDividerSize(3);
         jSplitPane5.setResizeWeight(0.2);
 
-        jPanel6.setBackground(new java.awt.Color(204, 153, 255));
+        jPanel6.setBackground(new java.awt.Color(242, 242, 242));
         jPanel6.setMinimumSize(new java.awt.Dimension(100, 0));
         jPanel6.setPreferredSize(new java.awt.Dimension(400, 396));
         jPanel6.setLayout(new java.awt.BorderLayout());
 
+        jScrollPane6.setBackground(new java.awt.Color(242, 242, 242));
         jScrollPane6.setViewportView(rootTreeComponent1);
 
         jPanel6.add(jScrollPane6, java.awt.BorderLayout.CENTER);
 
         jSplitPane5.setRightComponent(jPanel6);
 
-        jPanel4.setBackground(new java.awt.Color(153, 255, 153));
+        jPanel4.setBackground(new java.awt.Color(242, 242, 242));
         jPanel4.setMinimumSize(new java.awt.Dimension(100, 0));
         jPanel4.setPreferredSize(new java.awt.Dimension(200, 398));
         jPanel4.setLayout(new java.awt.BorderLayout());
 
+        jSplitPane3.setBackground(new java.awt.Color(242, 242, 242));
+        jSplitPane3.setDividerSize(3);
         jSplitPane3.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        jScrollPane3.setBackground(new java.awt.Color(242, 242, 242));
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -94,6 +113,8 @@ public class MainForm extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jList1);
 
         jSplitPane3.setTopComponent(jScrollPane3);
+
+        jScrollPane4.setBackground(new java.awt.Color(242, 242, 242));
 
         jList2.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -110,20 +131,27 @@ public class MainForm extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(jSplitPane5);
 
-        jPanel7.setBackground(new java.awt.Color(0, 255, 204));
+        jSplitPane6.setBackground(new java.awt.Color(242, 242, 242));
+        jSplitPane6.setDividerSize(3);
+
+        jPanel7.setBackground(new java.awt.Color(242, 242, 242));
         jPanel7.setMinimumSize(new java.awt.Dimension(100, 0));
         jPanel7.setPreferredSize(new java.awt.Dimension(300, 396));
         jPanel7.setLayout(new java.awt.BorderLayout());
 
+        jScrollPane2.setBackground(new java.awt.Color(242, 242, 242));
         jScrollPane2.setViewportView(jTree2);
 
         jPanel7.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         jSplitPane6.setRightComponent(jPanel7);
 
+        jPanel8.setBackground(new java.awt.Color(242, 242, 242));
         jPanel8.setMinimumSize(new java.awt.Dimension(100, 0));
         jPanel8.setPreferredSize(new java.awt.Dimension(150, 396));
         jPanel8.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane5.setBackground(new java.awt.Color(242, 242, 242));
 
         jList3.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -142,7 +170,7 @@ public class MainForm extends javax.swing.JFrame {
 
         MainPanel.add(CenterPanel, java.awt.BorderLayout.CENTER);
 
-        TopPanel.setBackground(new java.awt.Color(255, 51, 0));
+        TopPanel.setBackground(new java.awt.Color(242, 242, 242));
 
         jButton1.setText("Refresh");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -150,6 +178,22 @@ public class MainForm extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jToolBar1.setBackground(new java.awt.Color(242, 242, 242));
+        jToolBar1.setFloatable(false);
+        jToolBar1.setForeground(new java.awt.Color(242, 242, 242));
+        jToolBar1.setBorderPainted(false);
+
+        jButton2.setText("jButton2");
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton2);
 
         javax.swing.GroupLayout TopPanelLayout = new javax.swing.GroupLayout(TopPanel);
         TopPanel.setLayout(TopPanelLayout);
@@ -159,18 +203,20 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(228, 228, 228)
                 .addComponent(jButton1)
                 .addContainerGap(701, Short.MAX_VALUE))
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         TopPanelLayout.setVerticalGroup(
             TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TopPanelLayout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(28, 28, 28))
         );
 
         MainPanel.add(TopPanel, java.awt.BorderLayout.PAGE_START);
 
-        BottomPanel.setBackground(new java.awt.Color(51, 51, 255));
+        BottomPanel.setBackground(new java.awt.Color(242, 242, 242));
 
         jTextField1.setText("res");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -233,6 +279,24 @@ public class MainForm extends javax.swing.JFrame {
         RootTreeControl.getInstance().setRootPath(jTextField1.getText());
     }//GEN-LAST:event_jTextField1AncestorAdded
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Boolean old = UIManager.getBoolean("FileChooser.readOnly");
+        UIManager.put("FileChooser.readOnly", Boolean.TRUE);
+        
+        JFileChooser fileopen = new JFileChooser();
+        fileopen.setAcceptAllFileFilterUsed(false);
+        fileopen.setCurrentDirectory(Paths.get(".").toFile());
+        FileFilter filter = new FileNameExtensionFilter("*.assetbite", "assetbite");
+        fileopen.addChoosableFileFilter(filter);
+
+        int ret = fileopen.showDialog(null, "Open file");
+        UIManager.put("FileChooser.readOnly", old);
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            File file = fileopen.getSelectedFile();
+            System.out.println(file);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -273,6 +337,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel TopPanel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JList jList1;
     private javax.swing.JList jList2;
     private javax.swing.JList jList3;
@@ -290,6 +355,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane5;
     private javax.swing.JSplitPane jSplitPane6;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTree jTree2;
     private com.gamelion.assetbite.gui.roottree.RootTreeComponent rootTreeComponent1;
     // End of variables declaration//GEN-END:variables
