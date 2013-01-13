@@ -4,6 +4,7 @@
  */
 package com.gamelion.assetbite.engine.roottree;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -16,28 +17,24 @@ public class RootTreeElement {
     
     private Path path;
     private RootTreeElement parent;
-
     private TreeMap<Path, RootTreeElement> childrens;
+    private boolean directory;
 
     public RootTreeElement(Path path, RootTreeElement parent) {
         this.path = path;
         this.parent = parent;
+        directory = Files.isDirectory(path);
         childrens = new TreeMap<>(new RootTreeComparator());
     }
     
     void AddChild(Path child) {
-        try {
-            Path pathDiff = path.relativize(child);
-            int pathDiffCount = pathDiff.getNameCount();
-            Path narestChildPath = child.subpath(0, child.getNameCount() - pathDiffCount + 1);
-            RootTreeElement narestChild = AddChildIfNotExists(narestChildPath);
+        Path pathDiff = path.relativize(child);
+        int pathDiffCount = pathDiff.getNameCount();
+        Path narestChildPath = child.subpath(0, child.getNameCount() - pathDiffCount + 1);
+        RootTreeElement narestChild = AddChildIfNotExists(narestChildPath);
 
-            if (pathDiffCount > 1) {
-                narestChild.AddChild(child);
-            }
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            int aaa = 0;
+        if (pathDiffCount > 1) {
+            narestChild.AddChild(child);
         }
     }
     
@@ -68,5 +65,8 @@ public class RootTreeElement {
         return parent;
     }
 
+    public boolean isDirectory() {
+        return directory;
+    }
     
 }

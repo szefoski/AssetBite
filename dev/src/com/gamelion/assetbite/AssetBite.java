@@ -42,7 +42,7 @@ public class AssetBite {
         MainForm mf = new MainForm();
         mf.setVisible(true);
         
-        RootTreeControl.getInstance().refresh();
+        
         int aaa = 0;
         
         System.out.flush();

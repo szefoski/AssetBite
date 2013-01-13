@@ -13,9 +13,6 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -56,6 +53,9 @@ public class RootTreeControl {
     
     public void refresh() {
         rootPath = FileSystems.getDefault().getPath("res");
+        rth.clear();
+        rtc.clear();
+        rtc.refresh();
         rth.SetRoot(rootPath);
         startRefresh();
     }
@@ -65,8 +65,6 @@ public class RootTreeControl {
 
             @Override
             public void run() {
-                //rootPath = rootPath.toAbsolutePath();
-
                 RootTreeCatcher t = new RootTreeCatcher();
                 try {
                     Files.walkFileTree(rootPath, t);
@@ -82,6 +80,7 @@ public class RootTreeControl {
     }
     
     private void finishedRefresh() {
+        rtc.setRootName(rth.GetRootElement());
         walk(rth.GetRootElement());
         rtc.refresh();
         
@@ -89,7 +88,6 @@ public class RootTreeControl {
     
     private void walk(RootTreeElement element) {
         for(RootTreeElement value : element.getChildrens().values()) {
-            System.out.println("" + value.GetPath());
             rtc.Add(value);
             if (!value.isEmpty()) {
                 walk(value);

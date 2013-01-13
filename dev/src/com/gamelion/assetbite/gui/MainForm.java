@@ -4,6 +4,7 @@
  */
 package com.gamelion.assetbite.gui;
 
+import com.gamelion.assetbite.control.RootTreeControl;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -49,10 +50,10 @@ public class MainForm extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList();
         TopPanel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         BottomPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 700));
 
         MainPanel.setPreferredSize(new java.awt.Dimension(1000, 600));
         MainPanel.setLayout(new java.awt.BorderLayout());
@@ -141,15 +142,28 @@ public class MainForm extends javax.swing.JFrame {
 
         TopPanel.setBackground(new java.awt.Color(255, 51, 0));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout TopPanelLayout = new javax.swing.GroupLayout(TopPanel);
         TopPanel.setLayout(TopPanelLayout);
         TopPanelLayout.setHorizontalGroup(
             TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGroup(TopPanelLayout.createSequentialGroup()
+                .addGap(228, 228, 228)
+                .addComponent(jButton1)
+                .addContainerGap(699, Short.MAX_VALUE))
         );
         TopPanelLayout.setVerticalGroup(
             TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TopPanelLayout.createSequentialGroup()
+                .addContainerGap(49, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(28, 28, 28))
         );
 
         MainPanel.add(TopPanel, java.awt.BorderLayout.PAGE_START);
@@ -182,6 +196,10 @@ public class MainForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        RootTreeControl.getInstance().refresh();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,6 +240,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel CenterPanel;
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel TopPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JList jList1;
     private javax.swing.JList jList2;
     private javax.swing.JList jList3;

@@ -26,4 +26,8 @@ public class RootTreeHierarhy {
     public RootTreeElement GetRootElement() {
         return element;
     }
+    
+    public void clear() {
+        element = null;
+    }
 }
