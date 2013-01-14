@@ -6,6 +6,11 @@ package com.gamelion.assetbite.engine.roottree;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -17,14 +22,16 @@ public class RootTreeElement {
     
     private Path path;
     private RootTreeElement parent;
-    private TreeMap<Path, RootTreeElement> childrens;
+    private Map<Path, RootTreeElement> childrensMap;
+    private List<RootTreeElement> childrens;
     private boolean directory;
 
     public RootTreeElement(Path path, RootTreeElement parent) {
         this.path = path;
         this.parent = parent;
         directory = Files.isDirectory(path);
-        childrens = new TreeMap<>(new RootTreeComparator());
+        childrensMap = new HashMap<>();
+        childrens = new ArrayList<>();
     }
     
     void AddChild(Path child) {
@@ -39,25 +46,26 @@ public class RootTreeElement {
     }
     
     private RootTreeElement AddChildIfNotExists(Path childPath) {
-        RootTreeElement child = childrens.get(childPath);
+        RootTreeElement child = childrensMap.get(childPath);
         if (child == null) {
             child = new RootTreeElement(childPath, this);
-            childrens.put(childPath, child);
+            childrensMap.put(childPath, child);
+            childrens.add(child);
         }
         
         return child;
     }
     
     
-    public TreeMap<Path, RootTreeElement> getChildrens() {
-        return childrens;
+    public List<RootTreeElement> getChildrens() {
+        return Collections.unmodifiableList(childrens);
     }
     
     public boolean isEmpty() {
-        return childrens.isEmpty();
+        return childrensMap.isEmpty();
     }
     
-    public Path GetPath() {
+    public final Path GetPath() {
         return path;
     }
 
@@ -67,6 +75,13 @@ public class RootTreeElement {
 
     public boolean isDirectory() {
         return directory;
+    }
+    
+    public void sort() {
+        Collections.sort(childrens, new RootTreeComparator());
+        for(RootTreeElement value : childrens) {
+            value.sort();
+        }
     }
     
 }

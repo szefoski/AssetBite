@@ -72,7 +72,9 @@ public class RootTreeControl {
                 RootTreeCatcher t = new RootTreeCatcher();
                 try {
                     Files.walkFileTree(rootPath, t);
+                    rth.sort();
                     finishedRefresh();
+                    System.gc();
                 } catch (IOException ex) {
                     Logger.getLogger(AssetBite.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -91,7 +93,7 @@ public class RootTreeControl {
     }
     
     private void walk(RootTreeElement element) {
-        for(RootTreeElement value : element.getChildrens().values()) {
+        for(RootTreeElement value : element.getChildrens()) {
             rtc.Add(value);
             if (!value.isEmpty()) {
                 walk(value);

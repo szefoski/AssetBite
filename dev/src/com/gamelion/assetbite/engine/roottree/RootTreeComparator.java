@@ -12,19 +12,19 @@ import java.util.Comparator;
  *
  * @author Daniel
  */
-public class RootTreeComparator implements Comparator<Path> {
+public class RootTreeComparator implements Comparator<RootTreeElement> {
 
     @Override
-    public int compare(Path o1, Path o2) {
+    public int compare(RootTreeElement o1, RootTreeElement o2) {
         
-        if (Files.isDirectory(o1) && !Files.isDirectory(o2)) {
+        if (Files.isDirectory(o1.GetPath()) && !Files.isDirectory(o2.GetPath())) {
             return -1;
         }
-        else if (!Files.isDirectory(o1) && Files.isDirectory(o2)) {
+        else if (!Files.isDirectory(o1.GetPath()) && Files.isDirectory(o2.GetPath())) {
             return 1;
         }
         else {
-            return o1.compareTo(o2);
+            return o1.GetPath().compareTo(o2.GetPath());
         }
     }
     

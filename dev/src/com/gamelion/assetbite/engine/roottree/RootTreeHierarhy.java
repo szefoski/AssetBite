@@ -30,4 +30,8 @@ public class RootTreeHierarhy {
     public void clear() {
         element = null;
     }
+    
+    public void sort() {
+        element.sort();
+    }
 }
