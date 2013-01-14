@@ -106,7 +106,7 @@ public class MainForm extends javax.swing.JFrame {
         jScrollPane3.setBackground(new java.awt.Color(242, 242, 242));
 
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "iPhone Premium", "iPhone Free", "Android Amazon Premium", "Android Google Play Free", "Android Nook" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -117,7 +117,7 @@ public class MainForm extends javax.swing.JFrame {
         jScrollPane4.setBackground(new java.awt.Color(242, 242, 242));
 
         jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "sounds", "common", "graphics_1024x768", "graphics_2048x1536", "texts" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -184,7 +184,7 @@ public class MainForm extends javax.swing.JFrame {
         jToolBar1.setForeground(new java.awt.Color(242, 242, 242));
         jToolBar1.setBorderPainted(false);
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Open project");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
