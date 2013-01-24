@@ -1,6 +1,4 @@
-/dev/build
-/dev/dist
-/dev/nbproject/private
+/dev/bin
 
 *.class
 
