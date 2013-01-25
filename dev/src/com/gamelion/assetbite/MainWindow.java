@@ -14,6 +14,22 @@ import javax.swing.ListSelectionModel;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTree;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+
+import com.gamelion.assetbite.model.rootdirectory.DirectoryDataModel;
+
+import java.awt.FlowLayout;
+import java.nio.file.Paths;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executor;
+import java.util.concurrent.FutureTask;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import com.gamelion.assetbite.control.rootdirectory.*;
+import com.gamelion.assetbite.gui.RootDirectory;
 
 public class MainWindow {
 
@@ -23,6 +39,17 @@ public class MainWindow {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		try {
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // If Nimbus is not available, you can set the GUI to another look and feel.
+        }
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -57,6 +84,9 @@ public class MainWindow {
 		splitPaneMain.setResizeWeight(0.5);
 		
 		JPanel panel_1 = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) panel_1.getLayout();
+		flowLayout_1.setVgap(0);
+		flowLayout_1.setHgap(0);
 		panel_1.setBackground(Color.GRAY);
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -69,11 +99,22 @@ public class MainWindow {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(1)
 					.addComponent(splitPaneMain, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(1)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
 		);
+		panel.setLayout(null);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				RootTreeControl.getInstance().refreshRootTree();
+			}
+		});
+		btnNewButton.setBackground(UIManager.getColor("ArrowButton.background"));
+		btnNewButton.setBounds(87, 6, 90, 28);
+		panel.add(btnNewButton);
 		
 		JSplitPane splitPaneLeft = new JSplitPane();
 		splitPaneLeft.setResizeWeight(0.25);
@@ -82,7 +123,7 @@ public class MainWindow {
 		JScrollPane scrollPane = new JScrollPane();
 		splitPaneLeft.setRightComponent(scrollPane);
 		
-		JTree tree = new JTree();
+		RootDirectory tree = new RootDirectory();
 		scrollPane.setViewportView(tree);
 		
 		JSplitPane splitPane = new JSplitPane();
@@ -138,5 +179,4 @@ public class MainWindow {
 		scrollPane_4.setViewportView(list_2);
 		frame.getContentPane().setLayout(groupLayout);
 	}
-
 }
