@@ -47,17 +47,9 @@ public class RootTreeControl {
 	
 	private void finishedRefresh() {
 		guiElement.setRootName(ddm.GetRootElement());
-        walk(ddm.GetRootElement());
+		guiElement.walk(ddm.GetRootElement());
         guiElement.refresh();
-        
     }
     
-    private void walk(TreeElement element) {
-        for(TreeElement value : element.getChildrens()) {
-        	guiElement.Add(value);
-            if (!value.isEmpty()) {
-                walk(value);
-            }
-        }
-    }
+    
 }

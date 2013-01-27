@@ -34,7 +34,17 @@ public class RootDirectory extends JTree{
     }
 	
 	
-	public void Add(TreeElement element) {
+	public void walk(TreeElement element) {
+        for(TreeElement value : element.getChildrens()) {
+        	Add(value);
+            if (!value.isEmpty()) {
+                walk(value);
+            }
+        }
+    }
+	
+	
+	private void Add(TreeElement element) {
         
         DefaultMutableTreeNode parent = map.get(element.getParent());
         if (parent == null) {
@@ -47,7 +57,7 @@ public class RootDirectory extends JTree{
         map.put(element, treeNode);
     }
 	
-	void AddElement(DefaultMutableTreeNode parent, Path element) {
+	private void AddElement(DefaultMutableTreeNode parent, Path element) {
         parent.add(new DefaultMutableTreeNode(element));
     }
 	
@@ -76,5 +86,4 @@ public class RootDirectory extends JTree{
             return rte.GetPath().getFileName().toString();
         }
     }
-
 }

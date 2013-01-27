@@ -45,7 +45,7 @@ public class DirectoryDataModel {
 
 		@Override
 		public FileVisitResult postVisitDirectory(Path dir, IOException exc) {
-			//System.out.format("Directory: %s%n", dir);
+			System.out.format("Directory: %s%n", dir);
 			add(dir);
 			return FileVisitResult.CONTINUE;
 		}

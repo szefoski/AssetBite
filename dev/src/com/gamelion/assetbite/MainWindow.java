@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.AbstractListModel;
 import javax.swing.GroupLayout;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -17,6 +18,7 @@ import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import com.gamelion.assetbite.model.ProjectLoader;
 import com.gamelion.assetbite.model.rootdirectory.DirectoryDataModel;
 
 import java.awt.FlowLayout;
@@ -25,15 +27,35 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.FutureTask;
 import javax.swing.JButton;
+
+import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import com.gamelion.assetbite.control.rootdirectory.*;
+import com.gamelion.assetbite.gui.NameChangeWindow;
 import com.gamelion.assetbite.gui.RootDirectory;
+import javax.swing.JLayeredPane;
+import java.awt.CardLayout;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+import java.awt.BorderLayout;
+import com.gamelion.assetbite.model.elements.*;
+import com.gamelion.assetbite.gui.TargetList;
+import javax.swing.BoxLayout;
+import javax.swing.JToolBar;
+import com.gamelion.assetbite.gui.PacksList;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JMenuItem;
+import java.awt.Toolkit;
 
-public class MainWindow {
+public class MainWindow implements GuiNotifier.ObserverProjectName{
 
-	private JFrame frame;
+	private static JFrame frame;
+	private JLabel labelProjectName;
 
 	/**
 	 * Launch the application.
@@ -60,6 +82,11 @@ public class MainWindow {
 				}
 			}
 		});
+
+	}
+	
+	public static JFrame GetFrame() {
+		return frame;
 	}
 
 	/**
@@ -67,6 +94,7 @@ public class MainWindow {
 	 */
 	public MainWindow() {
 		initialize();
+		GuiNotifier.getInstance().setObserverProjectName(this);
 	}
 
 	/**
@@ -74,6 +102,7 @@ public class MainWindow {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindow.class.getResource("/javax/swing/plaf/metal/icons/ocean/info.png")));
 		frame.setBounds(100, 100, 545, 384);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -109,58 +138,98 @@ public class MainWindow {
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				RootTreeControl.getInstance().refreshRootTree();
+				MainControl.getInstance().LoadProject();
 			}
 		});
 		btnNewButton.setBackground(UIManager.getColor("ArrowButton.background"));
-		btnNewButton.setBounds(87, 6, 90, 28);
+		btnNewButton.setBounds(87, 25, 90, 28);
 		panel.add(btnNewButton);
+		
+	    labelProjectName = new JLabel("No Name");
+		labelProjectName.setForeground(new Color(255, 255, 255));
+		labelProjectName.setBounds(6, 6, 252, 16);
+		panel.add(labelProjectName);
 		
 		JSplitPane splitPaneLeft = new JSplitPane();
 		splitPaneLeft.setResizeWeight(0.25);
 		splitPaneMain.setLeftComponent(splitPaneLeft);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		splitPaneLeft.setRightComponent(scrollPane);
-		
-		RootDirectory tree = new RootDirectory();
-		scrollPane.setViewportView(tree);
 		
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setResizeWeight(0.5);
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPaneLeft.setLeftComponent(splitPane);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		splitPane.setLeftComponent(scrollPane_1);
-		
-		JList list = new JList();
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"iPhone Premium", "iPhone Free", "Andoid Amazon Premium", "Android GP Free", "Android Nook"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		scrollPane_1.setViewportView(list);
-		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		splitPane.setRightComponent(scrollPane_2);
 		
-		JList list_1 = new JList();
-		list_1.setModel(new AbstractListModel() {
-			String[] values = new String[] {"common", "sounds", "scripts", "assets_1024x768", "assets_320x480"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		scrollPane_2.setViewportView(list_1);
+		PacksList packsList = new PacksList();
+		scrollPane_2.setViewportView(packsList);
+		
+		JPanel panel_4 = new JPanel();
+		splitPane.setLeftComponent(panel_4);
+		panel_4.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		panel_4.add(scrollPane_1);
+		
+		TargetList targetList = new TargetList();
+		targetList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane_1.setViewportView(targetList);
+		
+		JToolBar toolBar = new JToolBar();
+		toolBar.setFloatable(false);
+		panel_4.add(toolBar, BorderLayout.NORTH);
+		
+		JButton btnNewButton_1 = new JButton("Add");
+		toolBar.add(btnNewButton_1);
+		
+		JButton btnRemove = new JButton("Remove");
+		toolBar.add(btnRemove);
+		
+		JButton btnCopy = new JButton("Copy");
+		toolBar.add(btnCopy);
+		
+		JLayeredPane layeredPane = new JLayeredPane();
+		splitPaneLeft.setRightComponent(layeredPane);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(0, 0, 255));
+		layeredPane.setLayer(panel_2, 5);
+		
+		JPanel panel_3 = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel_3.getLayout();
+		flowLayout.setVgap(0);
+		flowLayout.setHgap(0);
+		panel_3.setBackground(new Color(0, 255, 0));
+		layeredPane.setLayer(panel_3, 3);
+		GroupLayout gl_layeredPane = new GroupLayout(layeredPane);
+		gl_layeredPane.setHorizontalGroup(
+			gl_layeredPane.createParallelGroup(Alignment.LEADING)
+				.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+				.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+		);
+		gl_layeredPane.setVerticalGroup(
+			gl_layeredPane.createParallelGroup(Alignment.LEADING)
+				.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+				.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+		);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
+		gl_panel_2.setHorizontalGroup(
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+		);
+		gl_panel_2.setVerticalGroup(
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+		);
+		
+		RootDirectory tree = new RootDirectory();
+		tree.setBorder(null);
+		scrollPane.setViewportView(tree);
+		panel_2.setLayout(gl_panel_2);
+		layeredPane.setLayout(gl_layeredPane);
 		
 		JSplitPane splitPaneRight = new JSplitPane();
 		splitPaneRight.setResizeWeight(0.25);
@@ -179,4 +248,11 @@ public class MainWindow {
 		scrollPane_4.setViewportView(list_2);
 		frame.getContentPane().setLayout(groupLayout);
 	}
+
+
+	@Override
+	public void ObserverProjectNameChange(String name) {
+		labelProjectName.setText(name);
+	}
+	
 }
