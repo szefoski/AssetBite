@@ -110,6 +110,7 @@ public class MainWindow implements GuiNotifier.ObserverProjectName{
 		panel.setBackground(Color.DARK_GRAY);
 		
 		JSplitPane splitPaneMain = new JSplitPane();
+		splitPaneMain.setDividerSize(4);
 		splitPaneMain.setResizeWeight(0.5);
 		
 		JPanel panel_1 = new JPanel();
@@ -151,10 +152,12 @@ public class MainWindow implements GuiNotifier.ObserverProjectName{
 		panel.add(labelProjectName);
 		
 		JSplitPane splitPaneLeft = new JSplitPane();
+		splitPaneLeft.setDividerSize(4);
 		splitPaneLeft.setResizeWeight(0.25);
 		splitPaneMain.setLeftComponent(splitPaneLeft);
 		
 		JSplitPane splitPane = new JSplitPane();
+		splitPane.setDividerSize(4);
 		splitPane.setResizeWeight(0.5);
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPaneLeft.setLeftComponent(splitPane);
@@ -165,29 +168,12 @@ public class MainWindow implements GuiNotifier.ObserverProjectName{
 		PacksList packsList = new PacksList();
 		scrollPane_2.setViewportView(packsList);
 		
-		JPanel panel_4 = new JPanel();
-		splitPane.setLeftComponent(panel_4);
-		panel_4.setLayout(new BorderLayout(0, 0));
-		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		panel_4.add(scrollPane_1);
+		splitPane.setLeftComponent(scrollPane_1);
 		
 		TargetList targetList = new TargetList();
-		targetList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_1.setViewportView(targetList);
-		
-		JToolBar toolBar = new JToolBar();
-		toolBar.setFloatable(false);
-		panel_4.add(toolBar, BorderLayout.NORTH);
-		
-		JButton btnNewButton_1 = new JButton("Add");
-		toolBar.add(btnNewButton_1);
-		
-		JButton btnRemove = new JButton("Remove");
-		toolBar.add(btnRemove);
-		
-		JButton btnCopy = new JButton("Copy");
-		toolBar.add(btnCopy);
+		targetList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		JLayeredPane layeredPane = new JLayeredPane();
 		splitPaneLeft.setRightComponent(layeredPane);
@@ -232,6 +218,7 @@ public class MainWindow implements GuiNotifier.ObserverProjectName{
 		layeredPane.setLayout(gl_layeredPane);
 		
 		JSplitPane splitPaneRight = new JSplitPane();
+		splitPaneRight.setDividerSize(4);
 		splitPaneRight.setResizeWeight(0.25);
 		splitPaneMain.setRightComponent(splitPaneRight);
 		

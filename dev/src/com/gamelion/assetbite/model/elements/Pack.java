@@ -18,5 +18,9 @@ public class Pack {
 	public String toString() {
 		return name;
 	}
+
+	public String getName() {
+		return name;
+	}
 	
 }

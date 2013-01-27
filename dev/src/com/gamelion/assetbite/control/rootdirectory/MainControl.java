@@ -3,8 +3,10 @@ package com.gamelion.assetbite.control.rootdirectory;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.gamelion.assetbite.gui.TargetList;
 import com.gamelion.assetbite.model.ProjectLoader;
 import com.gamelion.assetbite.model.UUID;
+import com.gamelion.assetbite.model.elements.Pack;
 import com.gamelion.assetbite.model.elements.Project;
 import com.gamelion.assetbite.model.elements.Target;
 
@@ -53,5 +55,24 @@ public class MainControl {
 		} else {
 			GuiNotifier.getInstance().updatePacks(target.getPacksCollection());
 		}
+	}
+	
+	public void renameTarget(Target target, String name) {
+		target.setName(name);
+		GuiNotifier.getInstance().updateTargets(project.getTargets());
+	}
+	
+	
+	public void addPack(String name) {
+		Target target = TargetList.getInstance().getSelectedValue();
+		Pack pack = new Pack(UUID.getNextUUID(), name);
+		target.addPack(pack);
+		GuiNotifier.getInstance().updatePacks(target.getPacksCollection());
+	}
+	
+	public void removePack(Pack pack) {
+		Target target = TargetList.getInstance().getSelectedValue();
+		target.removePack(pack);
+		GuiNotifier.getInstance().updatePacks(target.getPacksCollection());
 	}
 }

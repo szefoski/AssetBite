@@ -17,7 +17,6 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -71,7 +70,7 @@ public class NameChangeWindow extends JDialog {
 			cancelButton.setActionCommand("Cancel");
 		}
 		
-		lblNewJgoodiesTitle = DefaultComponentFactory.getInstance().createTitle("title");
+		lblNewJgoodiesTitle = new JLabel();
 		lblNewJgoodiesTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(

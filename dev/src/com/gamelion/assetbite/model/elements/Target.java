@@ -36,12 +36,17 @@ public class Target {
 		this.name = name;
 	}
 	
-	public void addPack(Pack target) {
-		packsCollection.add(target);
+	public void addPack(Pack pack) {
+		packsCollection.add(pack);
 	}
 	
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	public void removePack(Pack pack) {
+		packsCollection.remove(pack);
+		
 	}
 }

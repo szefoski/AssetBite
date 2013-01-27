@@ -25,12 +25,12 @@ import com.gamelion.assetbite.model.elements.TargetsCollection;
 
 public class TargetList extends JList<Target> implements
 		GuiNotifier.ObserverTargets, ListSelectionListener, ActionListener {
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5325271628456196979L;
 	private DefaultListModel<Target> model = new DefaultListModel<>();
+	private static TargetList instance;
 	JPopupMenu popupMenuItem;
 	JMenuItem popupItemTitle;
 	JMenuItem popupItemAdd;
@@ -38,8 +38,13 @@ public class TargetList extends JList<Target> implements
 	JMenuItem popupItemCopy;
 	JMenuItem popupItemRemove;
 	NameChangeWindow nameChangeWindow;
+	
+	public static TargetList getInstance() {
+		return instance;
+	}
 
 	public TargetList() {
+		instance = this;
 		this.setModel(model);
 		this.addListSelectionListener(this);
 		GuiNotifier.getInstance().setObserverTargets(this);
@@ -59,14 +64,13 @@ public class TargetList extends JList<Target> implements
 		
 
 		this.addMouseListener(ms);
-
 	}
 
 	@Override
 	public void observerTargetsChange(TargetsCollection collection) {
 		Target array[] = new Target[collection.getElements().size()];
 		collection.getElements().toArray(array);
-		TargetList.this.setListData(array);
+		this.setListData(array);
 	}
 
 	@Override
@@ -132,7 +136,7 @@ public class TargetList extends JList<Target> implements
 			nameChangeWindow.dispose();
 			nameChangeWindow = null;
 		} else if (e.getActionCommand().equals("ChangeTargetName")) {
-			//MainControl.getInstance().addTarget(nameChangeWindow.getText());
+			MainControl.getInstance().renameTarget(this.getSelectedValue(), nameChangeWindow.getText());
 			nameChangeWindow.dispose();
 			nameChangeWindow = null;
 		}
