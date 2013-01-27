@@ -51,6 +51,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JMenuItem;
 import java.awt.Toolkit;
+import java.awt.Dimension;
 
 public class MainWindow implements GuiNotifier.ObserverProjectName{
 
@@ -103,7 +104,7 @@ public class MainWindow implements GuiNotifier.ObserverProjectName{
 	private void initialize() {
 		frame = new JFrame();
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindow.class.getResource("/javax/swing/plaf/metal/icons/ocean/info.png")));
-		frame.setBounds(100, 100, 545, 384);
+		frame.setBounds(100, 100, 846, 449);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
@@ -152,23 +153,31 @@ public class MainWindow implements GuiNotifier.ObserverProjectName{
 		panel.add(labelProjectName);
 		
 		JSplitPane splitPaneLeft = new JSplitPane();
+		splitPaneLeft.setPreferredSize(new Dimension(0, 0));
+		splitPaneLeft.setMinimumSize(new Dimension(0, 0));
 		splitPaneLeft.setDividerSize(4);
-		splitPaneLeft.setResizeWeight(0.25);
+		splitPaneLeft.setResizeWeight(0.5);
 		splitPaneMain.setLeftComponent(splitPaneLeft);
 		
 		JSplitPane splitPane = new JSplitPane();
+		splitPane.setPreferredSize(new Dimension(0, 0));
+		splitPane.setMaximumSize(new Dimension(0, 0));
+		splitPane.setMinimumSize(new Dimension(0, 0));
 		splitPane.setDividerSize(4);
 		splitPane.setResizeWeight(0.5);
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPaneLeft.setLeftComponent(splitPane);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setPreferredSize(new Dimension(0, 0));
+		scrollPane_2.setMinimumSize(new Dimension(25, 0));
 		splitPane.setRightComponent(scrollPane_2);
 		
 		PacksList packsList = new PacksList();
 		scrollPane_2.setViewportView(packsList);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setPreferredSize(new Dimension(0, 0));
 		splitPane.setLeftComponent(scrollPane_1);
 		
 		TargetList targetList = new TargetList();
@@ -179,10 +188,14 @@ public class MainWindow implements GuiNotifier.ObserverProjectName{
 		splitPaneLeft.setRightComponent(layeredPane);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setMinimumSize(new Dimension(0, 0));
+		panel_2.setMaximumSize(new Dimension(0, 0));
+		panel_2.setPreferredSize(new Dimension(0, 0));
 		panel_2.setBackground(new Color(0, 0, 255));
 		layeredPane.setLayer(panel_2, 5);
 		
 		JPanel panel_3 = new JPanel();
+		panel_3.setPreferredSize(new Dimension(0, 0));
 		FlowLayout flowLayout = (FlowLayout) panel_3.getLayout();
 		flowLayout.setVgap(0);
 		flowLayout.setHgap(0);
@@ -201,6 +214,9 @@ public class MainWindow implements GuiNotifier.ObserverProjectName{
 		);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setMinimumSize(new Dimension(0, 0));
+		scrollPane.setMaximumSize(new Dimension(0, 0));
+		scrollPane.setPreferredSize(new Dimension(0, 0));
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
@@ -212,23 +228,28 @@ public class MainWindow implements GuiNotifier.ObserverProjectName{
 		);
 		
 		RootDirectory tree = new RootDirectory();
+		tree.setMaximumSize(new Dimension(0, 0));
+		tree.setPreferredSize(new Dimension(0, 0));
 		tree.setBorder(null);
 		scrollPane.setViewportView(tree);
 		panel_2.setLayout(gl_panel_2);
 		layeredPane.setLayout(gl_layeredPane);
 		
 		JSplitPane splitPaneRight = new JSplitPane();
+		splitPaneRight.setPreferredSize(new Dimension(0, 0));
 		splitPaneRight.setDividerSize(4);
 		splitPaneRight.setResizeWeight(0.25);
 		splitPaneMain.setRightComponent(splitPaneRight);
 		
 		JScrollPane scrollPane_3 = new JScrollPane();
+		scrollPane_3.setPreferredSize(new Dimension(0, 0));
 		splitPaneRight.setRightComponent(scrollPane_3);
 		
 		JTree tree_1 = new JTree();
 		scrollPane_3.setViewportView(tree_1);
 		
 		JScrollPane scrollPane_4 = new JScrollPane();
+		scrollPane_4.setPreferredSize(new Dimension(0, 0));
 		splitPaneRight.setLeftComponent(scrollPane_4);
 		
 		JList list_2 = new JList();

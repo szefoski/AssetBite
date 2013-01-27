@@ -11,6 +11,7 @@ import com.gamelion.assetbite.model.elements.Target;
 public class ProjectLoader {
 	public Project Load(Path projectSettingsPath) {
 		assert(projectSettingsPath.isAbsolute());
+		Settings.getInstance().setProjectPath(projectSettingsPath);
 		Project project = new Project(UUID.getNextUUID(), projectSettingsPath.toString(), projectSettingsPath);
 
 		LoadTargets(project);
