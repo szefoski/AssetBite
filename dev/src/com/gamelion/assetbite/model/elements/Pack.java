@@ -8,7 +8,6 @@ import com.gamelion.assetbite.model.UUID;
 public class Pack {
 	private final UUID uuid;
 	private String name;
-	private RootDirectory rootDiectory;
 	
 	private Path paramSrcSubPath;
 	private Path paramDstSubPath;
@@ -18,7 +17,6 @@ public class Pack {
 	public Pack(UUID uuid, String name) {
 		this.uuid = uuid;
 		this.name = name;
-		rootDiectory = new RootDirectory();
 	}
 	
 	@Override

@@ -18,6 +18,7 @@ import javax.swing.event.ListSelectionListener;
 import com.gamelion.assetbite.MainWindow;
 import com.gamelion.assetbite.control.rootdirectory.GuiNotifier;
 import com.gamelion.assetbite.control.rootdirectory.MainControl;
+import com.gamelion.assetbite.control.rootdirectory.RootTreeControl;
 import com.gamelion.assetbite.model.elements.Pack;
 import com.gamelion.assetbite.model.elements.PacksCollection;
 import com.gamelion.assetbite.model.elements.Target;
@@ -65,8 +66,11 @@ public class PacksList extends JList<Pack> implements GuiNotifier.ObserverPacks,
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		if ( e.getValueIsAdjusting() )
-		System.out.println("Packs: " + this.getLeadSelectionIndex());
+		if ( !e.getValueIsAdjusting() )
+		{
+			System.out.println("Packs: " + this.getSelectedValue());
+			RootTreeControl.getInstance().refreshRootTree();
+		}
 		
 	}
 

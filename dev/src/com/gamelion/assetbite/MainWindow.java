@@ -137,7 +137,7 @@ public class MainWindow implements GuiNotifier.ObserverProjectName{
 		);
 		panel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Load");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MainControl.getInstance().LoadProject();
