@@ -29,14 +29,16 @@ public class TreeElement {
     }
     
     void AddChild(Path child) {
-        Path pathDiff = path.relativize(child);
-        int pathDiffCount = pathDiff.getNameCount();
-        Path narestChildPath = child.subpath(0, child.getNameCount() - pathDiffCount + 1);
-        TreeElement narestChild = AddChildIfNotExists(narestChildPath);
-
-        if (pathDiffCount > 1) {
-            narestChild.AddChild(child);
-        }
+    	if (!child.equals(path)) {
+    		Path pathDiff = path.relativize(child);
+    		int pathDiffCount = pathDiff.getNameCount();
+    		Path narestChildPath = child.subpath(0, child.getNameCount() - pathDiffCount + 1);
+    		TreeElement narestChild = AddChildIfNotExists(narestChildPath);
+    		
+    		if (pathDiffCount > 1) {
+    			narestChild.AddChild(child);
+    		}    		
+    	}
     }
     
     private TreeElement AddChildIfNotExists(Path childPath) {
