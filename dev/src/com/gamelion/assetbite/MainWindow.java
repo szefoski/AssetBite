@@ -214,23 +214,17 @@ public class MainWindow implements GuiNotifier.ObserverProjectName{
 		);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setMinimumSize(new Dimension(0, 0));
-		scrollPane.setMaximumSize(new Dimension(0, 0));
-		scrollPane.setPreferredSize(new Dimension(0, 0));
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
 		);
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
 		);
 		
 		RootDirectory tree = new RootDirectory();
-		tree.setMaximumSize(new Dimension(0, 0));
-		tree.setPreferredSize(new Dimension(0, 0));
-		tree.setBorder(null);
 		scrollPane.setViewportView(tree);
 		panel_2.setLayout(gl_panel_2);
 		layeredPane.setLayout(gl_layeredPane);
@@ -262,5 +256,4 @@ public class MainWindow implements GuiNotifier.ObserverProjectName{
 	public void ObserverProjectNameChange(String name) {
 		labelProjectName.setText(name);
 	}
-	
 }
